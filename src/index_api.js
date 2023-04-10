@@ -1,13 +1,15 @@
 const express = require('express')
 const fs = require('fs')
+const cors = require('cors')
 
-const data = JSON.parse(fs.readFileSync('data.json', 'utf-8'))
+const data = JSON.parse(fs.readFileSync('./src/data.json', 'utf-8'))
 
 // console.log(data);
 
 const app = express();
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
     const {author, message} = req.query
@@ -146,6 +148,6 @@ app.delete('/:id', (req,res) => {
     })
 })
 
-app.listen(3000, () => {
+app.listen(8080, () => {
     console.log('start server')
 })
